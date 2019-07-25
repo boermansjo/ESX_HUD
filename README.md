@@ -19,3 +19,9 @@ MySQL.Async.execute("INSERT INTO outfits (idSteam) VALUES (@identifier)", {
 		['@identifier']		= identifier
 	})
 ```
+## To Do
+* Modifier how data is saved.
+* Fix rotation buttons
+* Female skins
+* Add locals for easy translation
+* Changes in the HTML and CSS. (Now all 3 menus are scrolling at the same time)
