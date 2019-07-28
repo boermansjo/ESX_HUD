@@ -19,6 +19,9 @@ MySQL.Async.execute("INSERT INTO outfits (idSteam) VALUES (@identifier)", {
 		['@identifier']		= identifier
 	})
 ```
+* Make sure that all the spawnpoints are with the mp_m_freemode_01 model.
+ Example : ```spawnpoint 'mp_m_freemode_01' { x = -1044.73, y = -2749.13, z = 21.3634 }```
+ 
 ## To Do
 * Modifier how data is saved.
 * Fix rotation buttons
