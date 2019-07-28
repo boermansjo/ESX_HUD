@@ -65,8 +65,11 @@ files {
 	"ui/front.js",
 	"ui/script.js",
 	"ui/style.css",
-	"ui/tabs.css",
-	'ui/debounce.min.js'
+	'ui/debounce.min.js',
+	-- JS LOCALES
+	'ui/locales/nl.js',
+	'ui/locales/en.js',
+	"ui/tabs.css"
 }
 
 -- Client Scripts

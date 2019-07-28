@@ -79,4 +79,8 @@ $('.submit').on('click', function(e){
 $('.popup .button').on('click', function(e){
   e.preventDefault();
   $('.popup').fadeOut(200);
+  // Set language
+  $("#hairinessTab").html(scLocale.useItem);
+  $("#appearanceTab").html(scLocale.useItem);
+  $("#clothesTab").html(scLocale.useItem);
 });
