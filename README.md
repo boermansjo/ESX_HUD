@@ -40,3 +40,4 @@ MySQL.Async.execute("INSERT INTO outfits (idSteam) VALUES (@identifier)", {
 * HTML, CSS, Javascript changes.
 * Camera is still in progress. Can rotate. But formula is still not correct.
 * Starting to revamp the entire script !!! Only Hats are working correctly (the legend not yet) The Hat data is also saved via skinchanger.
+* Character now loads correctly after the initial login.
