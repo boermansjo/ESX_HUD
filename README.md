@@ -17,9 +17,9 @@ All credits go to him.
 
 * Open ```esx_identity\client\main.lua```
 * Find ```TriggerEvent('esx_skin:openSaveableMenu', myIdentifiers.id)``` and change it into ```TriggerEvent('hud:loadMenu')```
-* Open ```esx_identity\server\main.lua```
 
-!!!If you plan to use skinchanger, you don't need to import this!!!
+!!!If you plan to use skinchanger, you don't need to add this!!!
+* Open ```esx_identity\server\main.lua```
 * Find ```MySQL.Async.execute('INSERT INTO characters [...]``` and add the following just before or after :
 ```
 MySQL.Async.execute("INSERT INTO outfits (idSteam) VALUES (@identifier)", {
