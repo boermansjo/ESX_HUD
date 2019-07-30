@@ -8,6 +8,7 @@ local heading = 332.219879				-- Heading coord
 local zoom = "visage"					-- Define which tab is shown first (Default: Head)
 local isCameraActive
 local FirstSpawn     = true
+local PlayerLoaded   = false
 
 Citizen.CreateThread(function()
 	while ESX == nil do
@@ -957,6 +958,11 @@ AddEventHandler('playerSpawned', function()
 			FirstSpawn = false
 		end
 	end)
+end)
+
+RegisterNetEvent('esx:playerLoaded')
+AddEventHandler('esx:playerLoaded', function(xPlayer)
+	PlayerLoaded = true
 end)
 
 -- Disable Controls
