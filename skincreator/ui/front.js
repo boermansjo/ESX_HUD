@@ -71,22 +71,6 @@ $('.vetements .group').each(function(){
   $(this).find('.label-value').text('0/'+max);
 });
 
-// Click on tab nav
-$('.tab a').on('click', function(e){
-  e.preventDefault();
-  var link = $(this).attr('data-link');
-  $('.tab a').removeClass('active');
-  $('.tab a.'+link).addClass('active').removeClass('disabled');
-
-  $(this).addClass('disabled');
-  $('.block.active').fadeOut(200, function(){
-    $('.block').removeClass('active');
-    $('.block.'+link).fadeIn(200, function(){
-      $(this).addClass('active');
-    });
-  });
-});
-
 // Popup click on submit
 $('.submit').on('click', function(e){
   e.preventDefault();
@@ -95,22 +79,4 @@ $('.submit').on('click', function(e){
 $('.popup .button').on('click', function(e){
   e.preventDefault();
   $('.popup').fadeOut(200);
-}); 
-
-// Scroll with arrows keys
-var x = 0;
-var n = 100;
-$(document).keydown(function(e) {
-  if (e.which == 40) {
-      x += n;
-      $('#formSkinCreator').animate({
-        scrollTop: x
-      }, 400);
-  }
-  if (e.which == 38) {
-      x -= n;
-      $('#formSkinCreator').animate({
-        scrollTop: x
-      }, 400);
-  }
 });

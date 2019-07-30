@@ -65,16 +65,17 @@ files {
 	"ui/front.js",
 	"ui/script.js",
 	"ui/style.css",
+	"ui/tabs.css",
 	'ui/debounce.min.js'
 }
 
 -- Client Scripts
 client_scripts {
-    'client.lua',
+    'client/main.lua',
 }
 
 -- Server Scripts
 server_scripts {
     '@mysql-async/lib/MySQL.lua',     -- MySQL init
-    'server.lua',
+    'server/main.lua',
 }
