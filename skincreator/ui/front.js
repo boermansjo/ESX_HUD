@@ -10,6 +10,9 @@ $('.arrow-right').on('click', function (e) {
   var value = parseFloat($(this).prev().val()),
     newValue = parseFloat(value + 1),
     max = $(this).parent().prev().attr('data-legend');
+  if (newValue > max){
+	  newValue = max;
+  }
   $(this).prev().val(newValue);
   $(this).parent().prev().text(newValue + '' + max);
 });
@@ -19,6 +22,9 @@ $('.arrow-left').on('click', function (e) {
   var value = parseFloat($(this).next().val()),
     newValue = parseFloat(value - 1),
     max = $(this).parent().prev().attr('data-legend');
+  if (newValue<0) {
+	  newValue = 0;
+  }
   $(this).next().val(newValue);
   $(this).parent().prev().text(newValue + '' + max);
 });

@@ -9,6 +9,7 @@ local zoom = "visage"					-- Define which tab is shown first (Default: Head)
 local isCameraActive
 local FirstSpawn     = true
 local PlayerLoaded   = false
+local PrevHat,PrevGlasses
 
 Citizen.CreateThread(function()
 	while ESX == nil do
@@ -44,7 +45,9 @@ RegisterNUICallback('updateSkin', function(data)
 	beardcolor = tonumber(data.beardcolor)
 	-- Clothes
 	hats = tonumber(data.hats)
+	hats_texture = tonumber(data.hats_texture)
 	glasses = tonumber(data.glasses)
+	glasses_texture = tonumber(data.glasses_texture)
 	ears = tonumber(data.ears)
 	tops = tonumber(data.tops)
 	pants = tonumber(data.pants)
@@ -76,8 +79,10 @@ RegisterNUICallback('updateSkin', function(data)
 		
 		TriggerServerEvent("updateSkin", dad, mum, dadmumpercent, skin, eyecolor, acne, skinproblem, freckle, wrinkle, wrinkleopacity, eyebrow, eyebrowopacity, beard, beardopacity, beardcolor, hair, haircolor, torso, torsotext, leg, legtext, shoes, shoestext, accessory, accessorytext, undershirt, undershirttext, torso2, torso2text, prop_hat, prop_hat_text, prop_glasses, prop_glasses_text, prop_earrings, prop_earrings_text, prop_watches, prop_watches_text)
 		
-		TriggerEvent('skinchanger:change', "helmet_1", GetPedPropIndex(ped, 0))
-		TriggerEvent('skinchanger:change', "helmet_2", GetPedPropTextureIndex(ped, 0))
+		TriggerEvent('skinchanger:change', "helmet_1", hats)
+		TriggerEvent('skinchanger:change', "helmet_2", hats_texture)
+		TriggerEvent('skinchanger:change', "glasses_1", glasses)
+		TriggerEvent('skinchanger:change', "glasses_2", glasses_texture)
 		
 		TriggerEvent('skinchanger:getSkin', function(skin)
 			TriggerServerEvent('hud:save', skin)
@@ -115,27 +120,35 @@ RegisterNUICallback('updateSkin', function(data)
 		SetPedHeadOverlayColor  	(GetPlayerPed(-1), 2, 1, beardcolor, beardcolor)
 	
 		-- Clothes variations
-		print (hats)
+		if PrevHat ~= hats then
+			PrevHat = hats
+			hats_texture = 0
+			SendNUIMessage({
+				type = "updateMaxVal",
+				classname = "helmet_2",
+				maxVal = GetNumberOfPedPropTextureVariations	(GetPlayerPed(-1), 0, hats) - 1
+			})
+		end
+		
 		if hats == -1 then 
 			ClearPedProp(GetPlayerPed(-1), 0)
 		else
 			SetPedPropIndex(GetPlayerPed(-1), 0, hats,	0, 2)-- Helmet
 		end
 		
-		
-		if glasses == 0 then		ClearPedProp(GetPlayerPed(-1), 1)
-		elseif glasses == 1 then	SetPedPropIndex(GetPlayerPed(-1), 1, 4-1, 1-1, 2)
-		elseif glasses == 2 then	SetPedPropIndex(GetPlayerPed(-1), 1, 4-1, 10-1, 2)
-		elseif glasses == 3 then	SetPedPropIndex(GetPlayerPed(-1), 1, 5-1, 5-1, 2)
-		elseif glasses == 4 then	SetPedPropIndex(GetPlayerPed(-1), 1, 5-1, 10-1, 2)
-		elseif glasses == 5 then	SetPedPropIndex(GetPlayerPed(-1), 1, 6-1, 1-1, 2)
-		elseif glasses == 6 then	SetPedPropIndex(GetPlayerPed(-1), 1, 6-1, 9-1, 2)
-		elseif glasses == 7 then	SetPedPropIndex(GetPlayerPed(-1), 1, 8-1, 1-1, 2)
-		elseif glasses == 8 then	SetPedPropIndex(GetPlayerPed(-1), 1, 9-1, 2-1, 2)
-		elseif glasses == 9 then	SetPedPropIndex(GetPlayerPed(-1), 1, 10-1, 1-1, 2)
-		elseif glasses == 10 then	SetPedPropIndex(GetPlayerPed(-1), 1, 16-1, 7-1, 2)
-		elseif glasses == 11 then	SetPedPropIndex(GetPlayerPed(-1), 1, 18-1, 10-1, 2)
-		elseif glasses == 12 then	SetPedPropIndex(GetPlayerPed(-1), 1, 26-1, 1-1, 2)
+		if PrevGlasses ~= glasses then
+			PrevGlasses = glasses
+			glasses_texture = 0
+			SendNUIMessage({
+				type = "updateMaxVal",
+				classname = "glasses_2",
+				maxVal = GetNumberOfPedPropTextureVariations	(GetPlayerPed(-1), 1, glasses - 1)
+			})
+		end
+		if glasses == 0 then		
+			ClearPedProp(GetPlayerPed(-1), 1)
+		else
+			SetPedPropIndex(GetPlayerPed(-1), 1, glasses, glasses_texture, 2)--Glasses
 		end
 	
 		if ears == 0 then		ClearPedProp(GetPlayerPed(-1), 2)
@@ -925,13 +938,64 @@ function CloseSkinCreator()
 end
 
 function ShowSkinCreator(enable)
+local elements    = {}
+	TriggerEvent('skinchanger:getData', function(components, maxVals)
+		local _components = {}
+
+		for i=1, #components, 1 do
+			_components[i] = components[i]
+		end
+
+		-- Insert elements
+		for i=1, #_components, 1 do
+			local value       = _components[i].value
+			local componentId = _components[i].componentId
+
+			if componentId == 0 then
+				value = GetPedPropIndex(playerPed,  _components[i].componentId)
+			end
+
+			local data = {
+				label     = _components[i].label,
+				name      = _components[i].name,
+				value     = value,
+				min       = _components[i].min,
+			}
+
+			for k,v in pairs(maxVals) do
+				if k == _components[i].name then
+					data.max = v
+					break
+				end
+			end
+
+			table.insert(elements, data)
+		end
+	end)
+	
 	SetNuiFocus(enable, enable)
 	SendNUIMessage({
 		openSkinCreator = enable,
-		type = "updateMaxVal",
-		classname = "chapeaux",
-		maxVal = GetNumberOfPedPropDrawableVariations	(GetPlayerPed(-1), 0) - 1
 	})
+	
+	for index, data in ipairs(elements) do
+		local name, Valmax
+
+		for key, value in pairs(data) do
+			if key == 'name' then
+				name = value
+			end
+			if key == 'max' then
+				Valmax = value
+			end
+		end
+		
+		SendNUIMessage({
+			type = "updateMaxVal",
+			classname = name,
+			maxVal = Valmax
+		})
+	end
 end
 
 RegisterNetEvent('hud:loadMenu')

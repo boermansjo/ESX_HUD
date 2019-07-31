@@ -5,13 +5,11 @@ $(document).ready(function(){
     if(event.data.openSkinCreator == true){
       $(".skinCreator").css("display","block");
 	  $(".rotation").css("display","flex");
-      $("#cursorPointer").css("display","block");
     }
     // Close Skin Creator
     if(event.data.openSkinCreator == false){
       $(".skinCreator").fadeOut(400);
 	  $(".rotation").css("display","none");
-      $("#cursorPointer").css("display","none");
     }
 	// Click
     if (event.data.type == "updateMaxVal") {
@@ -43,8 +41,10 @@ $(document).ready(function(){
       beardopacity: $('.epaisseurbarbe').val(),
       beardcolor: $('input[name=barbecolor]:checked', '#formSkinCreator').val(),
       // Clothes
-      hats: $('input[class=chapeaux]').val(),
-      glasses: $('.lunettes .active').attr('data'),
+      hats: $('input[class=helmet_1]').val(),
+	  hats_texture: $('input[class=helmet_2]').val(),
+      glasses: $('input[class=glasses_1]').val(),
+	  glasses_texture: $('input[class=glasses_2]').val(),
       ears: $('.oreilles .active').attr('data'),
       tops: $('.hauts .active').attr('data'),
       pants: $('.pantalons .active').attr('data'),
@@ -75,8 +75,10 @@ $(document).ready(function(){
       beardopacity: $('.epaisseurbarbe').val(),
       beardcolor: $('input[name=barbecolor]:checked', '#formSkinCreator').val(),
       // Clothes
-      hats: $('input[class=chapeaux]').val(),
-      glasses: $('.lunettes .active').attr('data'),
+      hats: $('input[class=helmet_1]').val(),
+	  hats_texture: $('input[class=helmet_2]').val(),
+      glasses: $('input[class=glasses_1]').val(),
+	  glasses_texture: $('input[class=glasses_2]').val(),
       ears: $('.oreilles .active').attr('data'),
       tops: $('.hauts .active').attr('data'),
       pants: $('.pantalons .active').attr('data'),
@@ -109,8 +111,10 @@ $(document).ready(function(){
       beardopacity: $('.epaisseurbarbe').val(),
       beardcolor: $('input[name=barbecolor]:checked', '#formSkinCreator').val(),
       // Clothes
-      hats: $('input[class=chapeaux]').val(),
-      glasses: $('.lunettes .active').attr('data'),
+      hats: $('input[class=helmet_1]').val(),
+	  hats_texture: $('input[class=helmet_2]').val(),
+      glasses: $('input[class=glasses_1]').val(),
+	  glasses_texture: $('input[class=glasses_2]').val(),
       ears: $('.oreilles .active').attr('data'),
       tops: $('.hauts .active').attr('data'),
       pants: $('.pantalons .active').attr('data'),
