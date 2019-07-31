@@ -27,7 +27,7 @@
 				<div class="group">
                   <h2>Morphologie</h2>
                   <div class="input">
-                    <div class="label">Visage du père</div>
+                    <div class="label" id="maleFaces">Visage du père</div>
                     <div class="type-img">
                       <label for="pere1">
                         <input type="radio" name="pere" class="pere" value="0" id="pere1" checked>
@@ -128,7 +128,7 @@
                     </div>
                   </div>
                   <div class="input">
-                    <div class="label">Visage de la mère</div>
+                    <div class="label" id="femaleFaces">Visage de la mère</div>
                     <div class="type-img">
                       <label for="mere1">
                         <input type="radio" name="mere" class="mere" value="21" id="mere1" checked>
@@ -233,7 +233,7 @@
                   </div>  
                   
                   <div class="input">
-                    <div class="label">Couleur des yeux</div>
+                    <div class="label" id="eyeColor">Couleur des yeux</div>
                     <div class="type-radio">
                       <label for="eye1">
                         <input type="radio" name="eyecolor" class="eyecolor" value="0" id="eye1" checked>
@@ -276,9 +276,9 @@
                 </div>
                 
                 <div class="group">
-                  <h2>Peau</h2>
+                  <h2 id="skinHeader">Peau</h2>
                   <div class="input">
-                    <div class="label">Couleur de peau</div>
+                    <div class="label" id="skinColor">Couleur de peau</div>
                     <div class="type-radio">
                       <label for="p1">
                         <input type="radio" name="peaucolor" class="peaucolor" value="12" id="p1" checked>
@@ -330,7 +330,7 @@
                   </div>
 
                   <div class="input">
-                    <div class="label">Rides</div>
+                    <div class="label" id="wrinkles">Rides</div>
                     <div class="label-value" data-legend="/14"></div>
                     <div class="type-range">
                       <a href="#" class="arrow arrow-left">&nbsp;</a>
@@ -340,7 +340,7 @@
                   </div>
 
                   <div class="input">
-                    <div class="label">Intensité des rides</div>
+                    <div class="label" id="wrinkleIntensity">Intensité des rides</div>
                     <div class="label-value" data-legend="/10"></div>
                     <div class="type-range">
                       <a href="#" class="arrow arrow-left">&nbsp;</a>
@@ -354,9 +354,9 @@
 			<section id="content2">
 				<div class="block pilosite active">
                 <div class="group">
-                  <h2>Cheveux</h2>
+                  <h2 id="hairHeader">Cheveux</h2>
                   <div class="input">
-                    <div class="label">Coiffure</div>
+                    <div class="label" id="hairstyle">Coiffure</div>
                     <div class="label-value" data-legend="/74"></div>
                     <div class="type-range">
                       <a href="#" class="arrow arrow-left">&nbsp;</a>
@@ -366,7 +366,7 @@
                   </div>
 
                   <div class="input">
-                    <div class="label">Couleur de cheveux</div>
+                    <div class="label" id="hairColor">Couleur de cheveux</div>
                     <div class="type-radio">
                       <label for="c1">
                         <input type="radio" name="haircolor" class="haircolor" value="0" id="c1" checked>
@@ -469,9 +469,9 @@
                 </div>
 
                 <div class="group">
-                  <h2>Sourcils</h2>
+                  <h2 id="eyebrowHeader">Sourcils</h2>
                   <div class="input">
-                    <div class="label">Forme des sourcils</div>
+                    <div class="label" id="eyebrowShape">Forme des sourcils</div>
                     <div class="label-value" data-legend="/34"></div>
                     <div class="type-range">
                       <a href="#" class="arrow arrow-left">&nbsp;</a>
@@ -481,7 +481,7 @@
                   </div>
 
                   <div class="input">
-                    <div class="label">Épaisseur des sourcils</div>
+                    <div class="label" id="eyebrowThickness">Épaisseur des sourcils</div>
                     <div class="label-value" data-legend="/10"></div>
                     <div class="type-range">
                       <a href="#" class="arrow arrow-left">&nbsp;</a>
@@ -492,9 +492,9 @@
                 </div>
 
                 <div class="group">
-                  <h2>Barbe</h2>
+                  <h2 id="beardHeader">Barbe</h2>
                   <div class="input">
-                    <div class="label">Type de barbe</div>
+                    <div class="label" id="beardStyle">Type de barbe</div>
                     <div class="label-value" data-legend="/28"></div>
                     <div class="type-range">
                       <a href="#" class="arrow arrow-left">&nbsp;</a>
@@ -504,7 +504,7 @@
                   </div>
 
                   <div class="input">
-                    <div class="label">Épaisseur de barbe</div>
+                    <div class="label" id="beardThickness">Épaisseur de barbe</div>
                     <div class="label-value" data-legend="/10"></div>
                     <div class="type-range">
                       <a href="#" class="arrow arrow-left">&nbsp;</a>
@@ -514,7 +514,7 @@
                   </div>
 
                   <div class="input">
-                    <div class="label">Couleur de la pilosité</div>
+                    <div class="label" id="beardColor">Couleur de la pilosité</div>
                     <div class="type-radio">
                       <label for="bc1">
                         <input type="radio" name="barbecolor" class="barbecolor" value="0" id="bc1" checked>
@@ -912,7 +912,7 @@
         <div class="rotation">
           <div class="button">A</div>
           <div class="button">E</div>
-          <p>Rotation personnage</p>
+          <p id="rotatePerson">Rotation personnage</p>
         </div>
 
         <div class="popup confirmation">
