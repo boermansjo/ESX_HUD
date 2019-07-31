@@ -21,39 +21,3 @@ scLocale.beardStyle = "Beard style";
 scLocale.beardThickness = "Thickness of the beard";
 scLocale.beardColor = "Beard color";
 scLocale.hatsHeader = "Headwear";
-
-scLocale.headwear = [
-    "None",
-    "Black Fedora",
-    "White Fedora",
-    "Fisher hat",
-    "Black LS cap",
-    "White LS cap",
-    "Reggae hat",
-    "White beret",
-    "Grey beret",
-    "Black beret",
-    "Brown beret",
-    "Plain cap",
-    "Colored cap",
-    "Stank cap",
-    "Stank cap inversed",
-    "Gray hat",
-    "White hat",
-    "Cowboy hat",
-    "White bandana",
-    "Black bandana",
-    "Black audio headphones",
-    "White audio headphones",
-    "Cowboy hat",
-    "Holiday hat",
-    "Mafia hat",
-    "Melon shaped hat",
-    "Formal hat",
-    "Fairy ears",
-    "Red Broker Cap",
-    "Black Broker Cap",
-    "Trickster cap",
-    "Vapid cap",
-    "Christmas hat"
-];

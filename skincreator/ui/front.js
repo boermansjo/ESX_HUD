@@ -1,8 +1,3 @@
-// Set language
-$("#appearanceTab").html(scLocale.appearanceTab);
-$("#hairinessTab").html(scLocale.hairinessTab);
-$("#clothesTab").html(scLocale.clothesTab);
-
 // Put colors for input[type=radio]
 $('.color').each(function () {
   var color = $(this).attr('data-color');
@@ -84,8 +79,28 @@ $('.submit').on('click', function (e) {
 $('.popup .button').on('click', function (e) {
   e.preventDefault();
   $('.popup').fadeOut(200);
-  // Set language
-  $("#hairinessTab").html(scLocale.useItem);
-  $("#appearanceTab").html(scLocale.useItem);
-  $("#clothesTab").html(scLocale.useItem);
 });
+
+// Set language
+$("#tab1").html(scLocale.appearanceTab);
+$("#tab2").html(scLocale.hairinessTab);
+$("#tab3").html(scLocale.clothesTab);
+$("#morphology").html(scLocale.morphology);
+$("#maleFaces").html(scLocale.maleFaces);
+$("#femaleFaces").html(scLocale.femaleFaces);
+$("#eyeColor").html(scLocale.eyeColor);
+$("#skinHeader").html(scLocale.skinHeader);
+$("#skinColor").html(scLocale.skinColor);
+$("#wrinkles").html(scLocale.wrinkles);
+$("#wrinkleIntensity").html(scLocale.wrinkleIntensity);
+$("#hairHeader").html(scLocale.hairHeader);
+$("#hairstyle").html(scLocale.hairstyle);
+$("#hairColor").html(scLocale.hairColor);
+$("#eyebrowHeader").html(scLocale.eyebrowHeader);
+$("#eyebrowShape").html(scLocale.eyebrowShape);
+$("#eyebrowThickness").html(scLocale.eyebrowThickness);
+$("#beardHeader").html(scLocale.beardHeader);
+$("#beardStyle").html(scLocale.beardStyle);
+$("#beardThickness").html(scLocale.beardThickness);
+$("#beardColor").html(scLocale.beardColor);
+$("#hatsHeader").html(scLocale.hatsHeader);
