@@ -22,6 +22,7 @@ MySQL.Async.execute("INSERT INTO outfits (idSteam) VALUES ('[SteamID of user or 
 * ```ui/script.js``` JS for NUI elements
 * ```ui/front.js``` JS for HTML interaction
 * ```ui/styles.scss``` use this to edit CSS if you are comfortable with CSS pre-processor (must be compiled)
+* ```ui/index.html``` use this to change the locale of the resource. Adjust locales/en.js to the locale you wish to use.
 
 ## Credits & licence
 
