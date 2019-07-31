@@ -1,22 +1,4 @@
 $(document).ready(function(){
-  // Mouse Controls
-  var documentWidth = document.documentElement.clientWidth;
-  var documentHeight = document.documentElement.clientHeight;
-  var cursor = $('#cursorPointer');
-  var cursorX = documentWidth / 2;
-  var cursorY = documentHeight / 2;
-
-  function UpdateCursorPos() {
-    $('#cursorPointer').css('left', cursorX);
-    $('#cursorPointer').css('top', cursorY);
-  }
-
-  function triggerClick(x, y) {
-    var element = $(document.elementFromPoint(x, y));
-    element.focus().click();
-    return true;
-  }
-
   // Listen for NUI Events
   window.addEventListener('message', function(event){
     // Open Skin Creator
@@ -31,18 +13,11 @@ $(document).ready(function(){
 	  $(".rotation").css("display","none");
       $("#cursorPointer").css("display","none");
     }
-
-    // Click
-    if (event.data.type == "click") {
-      triggerClick(cursorX - 1, cursorY - 1);
+	// Click
+    if (event.data.type == "updateMaxVal") {
+	  $('input.' + event.data.classname).prop('max',event.data.maxVal);
+	  $('div[name=' + event.data.classname + ']').attr('data-legend', '/'+event.data.maxVal);
     }
-  });
-
-  // Mousemove
-  $(document).mousemove(function(event) {
-    cursorX = event.pageX;
-    cursorY = event.pageY;
-    UpdateCursorPos();
   });
 
   // Form update
@@ -68,7 +43,7 @@ $(document).ready(function(){
       beardopacity: $('.epaisseurbarbe').val(),
       beardcolor: $('input[name=barbecolor]:checked', '#formSkinCreator').val(),
       // Clothes
-      hats: $('.chapeaux .active').attr('data'),
+      hats: $('input[class=chapeaux]').val(),
       glasses: $('.lunettes .active').attr('data'),
       ears: $('.oreilles .active').attr('data'),
       tops: $('.hauts .active').attr('data'),
@@ -100,7 +75,7 @@ $(document).ready(function(){
       beardopacity: $('.epaisseurbarbe').val(),
       beardcolor: $('input[name=barbecolor]:checked', '#formSkinCreator').val(),
       // Clothes
-      hats: $('.chapeaux .active').attr('data'),
+      hats: $('input[class=chapeaux]').val(),
       glasses: $('.lunettes .active').attr('data'),
       ears: $('.oreilles .active').attr('data'),
       tops: $('.hauts .active').attr('data'),
@@ -134,7 +109,7 @@ $(document).ready(function(){
       beardopacity: $('.epaisseurbarbe').val(),
       beardcolor: $('input[name=barbecolor]:checked', '#formSkinCreator').val(),
       // Clothes
-      hats: $('.chapeaux .active').attr('data'),
+      hats: $('input[class=chapeaux]').val(),
       glasses: $('.lunettes .active').attr('data'),
       ears: $('.oreilles .active').attr('data'),
       tops: $('.hauts .active').attr('data'),
@@ -158,8 +133,8 @@ $(document).ready(function(){
   });
 
   // Zoom out camera for clothes
-  $('.tab a').on('click', function(e){
-    e.preventDefault();
+  $('#tabs label').on('click', function(e){
+    //e.preventDefault();
     $.post('http://skincreator/zoom', JSON.stringify({
       zoom: $(this).attr('data-link')
     }));

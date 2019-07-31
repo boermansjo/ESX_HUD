@@ -1,82 +1,29 @@
 <html>
     <head>
         <!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script> -->
-        <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+		<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+        <!--<script src="nui://game/ui/jquery.js" type="text/javascript"></script> -->
         <link href="style.css" rel="stylesheet" type="text/css" />
+		<link href="tabs.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <img id="cursorPointer" src="assets/cursor.png">
-        <div class="skinCreator">
-
-            <!-- Tabs -->
-            <div class="tab">
-              <!-- <a href="#" class="identity disabled" data-link="identity">Identité</a> -->
-              <a href="#" class="visage active" data-link="visage">Apparence</a>
-              <a href="#" class="pilosite" data-link="pilosite">Pilosité</a>
-              <a href="#" class="vetements" data-link="vetements">Vêtements</a>
-            </div>
-            
-            <form id="formSkinCreator">
-              <!-- BLOCK IDENTITY -->
-              <div class="block identity">
-                <div class="group">
-                    <h2>Aptitudes <a href="#">?</a></h2>
-                    <div class="input">
-                      <div class="label">Endurance <a href="#">?</a></div>
-                      <div class="label-value" data-legend="/??"></div>
-                      <div class="type-range">
-                        <a href="#" class="arrow arrow-left">&nbsp;</a>
-                        <input value="0" type="range" class="endurance" min="0" max="10">
-                        <a href="#" class="arrow arrow-right">&nbsp;</a>
-                      </div>
-                    </div>
-  
-                    <div class="input">
-                      <div class="label">Force <a href="#">?</a></div>
-                      <div class="label-value" data-legend="/??"></div>
-                      <div class="type-range">
-                        <a href="#" class="arrow arrow-left">&nbsp;</a>
-                        <input value="0" type="range" class="force" min="0" max="10">
-                        <a href="#" class="arrow arrow-right">&nbsp;</a>
-                      </div>
-                    </div>
-
-                    <div class="input">
-                      <div class="label">Tir <a href="#">?</a></div>
-                      <div class="label-value" data-legend="/??"></div>
-                      <div class="type-range">
-                        <a href="#" class="arrow arrow-left">&nbsp;</a>
-                        <input value="0" type="range" class="tir" min="0" max="10">
-                        <a href="#" class="arrow arrow-right">&nbsp;</a>
-                      </div>
-                    </div>
-
-                    <div class="input">
-                      <div class="label">Hygiène <a href="#">?</a></div>
-                      <div class="label-value" data-legend="/??"></div>
-                      <div class="type-range">
-                        <a href="#" class="arrow arrow-left">&nbsp;</a>
-                        <input value="0" type="range" class="hygiene" min="0" max="10">
-                        <a href="#" class="arrow arrow-right">&nbsp;</a>
-                      </div>
-                    </div>
-
-                    <div class="input">
-                      <div class="label">Mental <a href="#">?</a></div>
-                      <div class="label-value" data-legend="/??"></div>
-                      <div class="type-range">
-                        <a href="#" class="arrow arrow-left">&nbsp;</a>
-                        <input value="0" type="range" class="mental" min="0" max="10">
-                        <a href="#" class="arrow arrow-right">&nbsp;</a>
-                      </div>
-                    </div>
-                  </div>
-              </div>
-
-              <!-- BLOCK VISAGE -->
-              <div class="block visage active">
-                
-                <div class="group">
+		<div class="skinCreator">
+		<input id="radio1" type="radio" name="css-tabs" checked>
+		<input id="radio2" type="radio" name="css-tabs">
+		<input id="radio3" type="radio" name="css-tabs">
+		<div id="tabs">
+			<label id="tab1" for="radio1" data-link="visage">Apparence</label>
+			<label id="tab2" for="radio2" data-link="pilosite">Pilosité</label>
+			<label id="tab3" for="radio3" data-link="vetements">Vêtements</label>
+		</div>
+		<div id="content">
+			<form id="formSkinCreator">
+			<section id="content1">
+				<div class="block visage active">
+				<div class="group">
                   <h2>Morphologie</h2>
                   <div class="input">
                     <div class="label">Visage du père</div>
@@ -401,11 +348,10 @@
                     </div>
                   </div>
                 </div>
-
-              </div>
-
-              <!-- BLOCK PILOSITE -->
-              <div class="block pilosite">
+				</div>
+			</section>
+			<section id="content2">
+				<div class="block pilosite active">
                 <div class="group">
                   <h2>Cheveux</h2>
                   <div class="input">
@@ -622,49 +568,20 @@
               </div>
 
               </div>
-
-              <!-- BLOCK CLOTHES -->
-              <div class="block vetements">
+			</section>
+			<section id="content3">
+				<div class="block vetements active">
                 <div class="group">
                   <h2>Tête</h2>
-                  <div class="label-value" data-legend="">0</div>
-                  <ul class="chapeaux">
-                    <button type="button" class="arrow arrowvetement-left">&nbsp;</button>
-                    <li data="0" class="active">Aucun</li>
-                    <li data="1">Bonnet noir</li>
-                    <li data="2">Bonnet blanc</li>
-                    <li data="3">Bob de pêcheur</li>
-                    <li data="4">Casquette LS noire</li>
-                    <li data="5">Casquette LS blanche</li>
-                    <li data="6">Bonnet reggae</li>
-                    <li data="7">Beret blanc</li>
-                    <li data="8">Beret gris</li>
-                    <li data="9">Beret noir</li>
-                    <li data="10">Beret brun</li>
-                    <li data="11">Casquette f°</li>
-                    <li data="12">Casquette f° (à l'envers)</li>
-                    <li data="13">Casquette Stank</li>
-                    <li data="14">Casquette Stank (à l'envers)</li>
-                    <li data="15">Chapeau gris</li>
-                    <li data="16">Chapeau blanc</li>
-                    <li data="17">Chapeau de cowboy</li>
-                    <li data="18">Bandana blanc</li>
-                    <li data="19">Bandana noir</li>
-                    <li data="20">Casque audio noir</li>
-                    <li data="21">Casque audio blanc</li>
-                    <li data="22">Bob tréi</li>
-                    <li data="23">Chapeau de vacances</li>
-                    <li data="24">Chapeau de mafieu</li>
-                    <li data="25">Chapeau melon</li>
-                    <li data="26">Chapeau haut de forme</li>
-                    <li data="27">Bonnet en laine</li>
-                    <li data="28">Casquette Broker rouge</li>
-                    <li data="29">Casquette Broker noire</li>
-                    <li data="30">Casquette Trickster</li>
-                    <li data="31">Casquette Vapid</li>
-                    <li data="32">Casquette Sand Castle</li>
-                    <button type="button" class="arrow arrowvetement-right">&nbsp;</button>
-                  </ul>
+                  <div class="input">
+                    <div class="label">Chapeaux</div>
+                    <div class="label-value" name="hats" data-legend="/-1"></div>
+                    <div class="type-range">
+                      <a href="#" class="arrow arrow-left">&nbsp;</a>
+                      <input value="-1" type="range" class="chapeaux" min="-1" max="-1">
+                      <a href="#" class="arrow arrow-right">&nbsp;</a>
+                    </div>
+                  </div>
                 </div>
                 <div class="group">
                   <h2>Lunettes</h2>
@@ -985,12 +902,11 @@
                 </div>
 
               </div>
-
-              <!-- Submit -->
-              <button class="submit">Terminer</button>
-
-          </form>
-        </div>
+			</section>
+				<button class="submit">Terminer</button>
+			</form>
+		</div>
+		</div>
 
         <div class="rotation">
           <div class="button">A</div>

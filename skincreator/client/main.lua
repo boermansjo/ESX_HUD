@@ -7,6 +7,8 @@ local cam = -1							-- Camera control
 local heading = 332.219879				-- Heading coord
 local zoom = "visage"					-- Define which tab is shown first (Default: Head)
 local isCameraActive
+local FirstSpawn     = true
+local PlayerLoaded   = false
 
 Citizen.CreateThread(function()
 	while ESX == nil do
@@ -71,8 +73,18 @@ RegisterNUICallback('updateSkin', function(data)
 		local prop_earrings_text = GetPedPropTextureIndex(ped, 2)
 		local prop_watches = GetPedPropIndex(ped, 6)
 		local prop_watches_text = GetPedPropTextureIndex(ped, 6)
-
+		
 		TriggerServerEvent("updateSkin", dad, mum, dadmumpercent, skin, eyecolor, acne, skinproblem, freckle, wrinkle, wrinkleopacity, eyebrow, eyebrowopacity, beard, beardopacity, beardcolor, hair, haircolor, torso, torsotext, leg, legtext, shoes, shoestext, accessory, accessorytext, undershirt, undershirttext, torso2, torso2text, prop_hat, prop_hat_text, prop_glasses, prop_glasses_text, prop_earrings, prop_earrings_text, prop_watches, prop_watches_text)
+		
+		TriggerEvent('skinchanger:change', "helmet_1", GetPedPropIndex(ped, 0))
+		TriggerEvent('skinchanger:change', "helmet_2", GetPedPropTextureIndex(ped, 0))
+		
+		TriggerEvent('skinchanger:getSkin', function(skin)
+			TriggerServerEvent('hud:save', skin)
+			if submitCb ~= nil then
+				submitCb(data, menu)
+			end
+		end)
 		
 		CloseSkinCreator()
 	else
@@ -80,6 +92,7 @@ RegisterNUICallback('updateSkin', function(data)
 
 		-- Face
 		SetPedHeadBlendData			(GetPlayerPed(-1), dad, mum, dad, skin, skin, skin, dadmumpercent * 0.1, dadmumpercent * 0.1, 1.0, true)
+		
 		SetPedEyeColor				(GetPlayerPed(-1), eyecolor)
 		if acne == 0 then
 			SetPedHeadOverlay		(GetPlayerPed(-1), 0, acne, 0.0)
@@ -92,6 +105,7 @@ RegisterNUICallback('updateSkin', function(data)
 		else
 			SetPedHeadOverlay		(GetPlayerPed(-1), 9, freckle, 1.0)
 		end
+		
 		SetPedHeadOverlay       	(GetPlayerPed(-1), 3, wrinkle, wrinkleopacity * 0.1)
 		SetPedComponentVariation	(GetPlayerPed(-1), 2, hair, 0, 2)
 		SetPedHairColor				(GetPlayerPed(-1), haircolor, haircolor)
@@ -101,40 +115,13 @@ RegisterNUICallback('updateSkin', function(data)
 		SetPedHeadOverlayColor  	(GetPlayerPed(-1), 2, 1, beardcolor, beardcolor)
 	
 		-- Clothes variations
-		if hats == 0 then		ClearPedProp(GetPlayerPed(-1), 0)
-		elseif hats == 1 then	SetPedPropIndex(GetPlayerPed(-1), 0, 3-1, 1-1, 2)
-		elseif hats == 2 then	SetPedPropIndex(GetPlayerPed(-1), 0, 3-1, 7-1, 2)
-		elseif hats == 3 then	SetPedPropIndex(GetPlayerPed(-1), 0, 4-1, 3-1, 2)
-		elseif hats == 4 then	SetPedPropIndex(GetPlayerPed(-1), 0, 5-1, 1-1, 2)
-		elseif hats == 5 then	SetPedPropIndex(GetPlayerPed(-1), 0, 5-1, 2-1, 2)
-		elseif hats == 6 then	SetPedPropIndex(GetPlayerPed(-1), 0, 6-1, 1-1, 2)
-		elseif hats == 7 then	SetPedPropIndex(GetPlayerPed(-1), 0, 8-1, 1-1, 2)
-		elseif hats == 8 then	SetPedPropIndex(GetPlayerPed(-1), 0, 8-1, 2-1, 2)
-		elseif hats == 9 then	SetPedPropIndex(GetPlayerPed(-1), 0, 8-1, 3-1, 2)
-		elseif hats == 10 then	SetPedPropIndex(GetPlayerPed(-1), 0, 8-1, 6-1, 2)
-		elseif hats == 11 then	SetPedPropIndex(GetPlayerPed(-1), 0, 11-1, 6-1, 2)
-		elseif hats == 12 then	SetPedPropIndex(GetPlayerPed(-1), 0, 10-1, 6-1, 2)
-		elseif hats == 13 then	SetPedPropIndex(GetPlayerPed(-1), 0, 11-1, 8-1, 2)
-		elseif hats == 14 then	SetPedPropIndex(GetPlayerPed(-1), 0, 10-1, 8-1, 2)
-		elseif hats == 15 then	SetPedPropIndex(GetPlayerPed(-1), 0, 13-1, 1-1, 2)
-		elseif hats == 16 then	SetPedPropIndex(GetPlayerPed(-1), 0, 13-1, 2-1, 2)
-		elseif hats == 17 then	SetPedPropIndex(GetPlayerPed(-1), 0, 14-1, 3-1, 2)
-		elseif hats == 18 then	SetPedPropIndex(GetPlayerPed(-1), 0, 15-1, 1-1, 2)
-		elseif hats == 19 then	SetPedPropIndex(GetPlayerPed(-1), 0, 15-1, 2-1, 2)
-		elseif hats == 20 then	SetPedPropIndex(GetPlayerPed(-1), 0, 16-1, 2-1, 2)
-		elseif hats == 21 then	SetPedPropIndex(GetPlayerPed(-1), 0, 16-1, 3-1, 2)
-		elseif hats == 22 then	SetPedPropIndex(GetPlayerPed(-1), 0, 21-1, 6-1, 2)
-		elseif hats == 23 then	SetPedPropIndex(GetPlayerPed(-1), 0, 22-1, 1-1, 2)
-		elseif hats == 24 then	SetPedPropIndex(GetPlayerPed(-1), 0, 26-1, 2-1, 2)
-		elseif hats == 25 then	SetPedPropIndex(GetPlayerPed(-1), 0, 27-1, 1-1, 2)
-		elseif hats == 26 then	SetPedPropIndex(GetPlayerPed(-1), 0, 28-1, 1-1, 2)
-		elseif hats == 27 then	SetPedPropIndex(GetPlayerPed(-1), 0, 35-1, 0, 2)
-		elseif hats == 28 then	SetPedPropIndex(GetPlayerPed(-1), 0, 56-1, 1-1, 2)
-		elseif hats == 29 then	SetPedPropIndex(GetPlayerPed(-1), 0, 56-1, 2-1, 2)
-		elseif hats == 30 then	SetPedPropIndex(GetPlayerPed(-1), 0, 56-1, 3-1, 2)
-		elseif hats == 31 then	SetPedPropIndex(GetPlayerPed(-1), 0, 77-1, 20-1, 2)
-		elseif hats == 32 then	SetPedPropIndex(GetPlayerPed(-1), 0, 97-1, 3-1, 2)
+		print (hats)
+		if hats == -1 then 
+			ClearPedProp(GetPlayerPed(-1), 0)
+		else
+			SetPedPropIndex(GetPlayerPed(-1), 0, hats,	0, 2)-- Helmet
 		end
+		
 		
 		if glasses == 0 then		ClearPedProp(GetPlayerPed(-1), 1)
 		elseif glasses == 1 then	SetPedPropIndex(GetPlayerPed(-1), 1, 4-1, 1-1, 2)
@@ -904,17 +891,20 @@ end)
 -- Character rotation
 RegisterNUICallback('rotateleftheading', function(data)
 	local currentHeading = GetEntityHeading(GetPlayerPed(-1))
-	heading = currentHeading+tonumber(data.value)
+	heading = heading+tonumber(data.value)
+	print('rotated left')
 end)
 
 RegisterNUICallback('rotaterightheading', function(data)
 	local currentHeading = GetEntityHeading(GetPlayerPed(-1))
-	heading = currentHeading-tonumber(data.value)
+	heading = heading-tonumber(data.value)
+	print('rotated right')
 end)
 
 -- Define which part of the body must be zoomed
 RegisterNUICallback('zoom', function(data)
 	zoom = data.zoom
+	print('zoomed')
 end)
 
 
@@ -935,9 +925,12 @@ function CloseSkinCreator()
 end
 
 function ShowSkinCreator(enable)
-	SetNuiFocus(enable)
+	SetNuiFocus(enable, enable)
 	SendNUIMessage({
-		openSkinCreator = enable
+		openSkinCreator = enable,
+		type = "updateMaxVal",
+		classname = "chapeaux",
+		maxVal = GetNumberOfPedPropDrawableVariations	(GetPlayerPed(-1), 0) - 1
 	})
 end
 
@@ -947,8 +940,32 @@ AddEventHandler('hud:loadMenu', function()
 	ShowSkinCreator(true)
 end)
 
+AddEventHandler('playerSpawned', function()
+	Citizen.CreateThread(function()
+		while not PlayerLoaded do
+			Citizen.Wait(10)
+		end
+
+		if FirstSpawn then
+			ESX.TriggerServerCallback('hud:getPlayerSkin', function(skin, jobSkin)
+				if skin == nil then
+					TriggerEvent('skinchanger:loadSkin', {sex = 0})
+				else
+					TriggerEvent('skinchanger:loadSkin', skin)
+				end
+			end)
+
+			FirstSpawn = false
+		end
+	end)
+end)
+
+RegisterNetEvent('esx:playerLoaded')
+AddEventHandler('esx:playerLoaded', function(xPlayer)
+	PlayerLoaded = true
+end)
+
 -- Disable Controls
--- TODO: Reset controls when player confirm his character creation
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
@@ -966,11 +983,8 @@ Citizen.CreateThread(function()
 			DisableControlAction(0, 25, true)
 			DisableControlAction(0, 24, true)
 
-			if IsDisabledControlJustReleased(0, 24) or IsDisabledControlJustReleased(0, 142) then -- MeleeAttackAlternate
-				SendNUIMessage({type = "click"})
-			end
 			local ped = PlayerPedId()
-
+			
 			-- Player
 			SetPlayerInvincible(ped, true)
 
@@ -993,6 +1007,41 @@ Citizen.CreateThread(function()
 				SetCamCoord(cam, x+0.3, y+2.0, z+0.0)
 				SetCamRot(cam, 0.0, 0.0, 170.0)
 			end
+			
+			--Rotate camera
+			local angle = heading * math.pi / 180.0
+			local theta = {
+				x = math.cos(angle),
+				y = math.sin(angle)
+			}
+
+			local pos = {
+				x = x + (0.2 * theta.x),
+				y = y + (1 * theta.y)
+			}
+
+			local angleToLook = heading - 140.0
+			if angleToLook > 360 then
+				angleToLook = angleToLook - 360
+			elseif angleToLook < 0 then
+				angleToLook = angleToLook + 360
+			end
+
+			angleToLook = angleToLook * math.pi / 180.0
+			local thetaToLook = {
+				x = math.cos(angleToLook),
+				y = math.sin(angleToLook)
+			}
+
+			local posToLook = {
+				x = x + (0.2 * thetaToLook.x),
+				y = y + (1 * thetaToLook.y)
+			}
+			
+			SetCamCoord(cam, pos.x, pos.y, z+0.7)
+			PointCamAtCoord(cam, posToLook.x, posToLook.y, z)
+
+			--ESX.ShowHelpNotification(_U('use_rotate_view'))
 		else
 			Citizen.Wait(500)
 		end

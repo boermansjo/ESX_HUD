@@ -168,6 +168,20 @@ body {
   border-radius: 20px;
   overflow: hidden;
   display: none;  }
+  
+ .skinCreator2 {
+  position: absolute;
+  width: 420px;
+  min-height: calc(100% - 100px);
+  height: 0px;
+  color: #FFF;
+  top: 50px;
+  right: 90px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: rgba(24, 27, 32, 0.9);
+  border-radius: 20px;
+  overflow: hidden;}
 
 form {
   width: 100%;

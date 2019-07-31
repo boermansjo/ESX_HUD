@@ -1,0 +1,134 @@
+main {
+  max-width: 800px;
+  margin: 30px auto;
+	background: #3F3F3D;
+	padding: 30px;
+	box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+}
+input[name=css-tabs] {
+  display: none;
+}
+a {
+	color: #F29A77;
+}
+#tabs {
+	padding: 0 0 0 50px;
+	width: 100%;
+	background: #2B2A28;
+	height: 80px;
+	border-bottom: 5px solid #6770DA;
+	box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+}
+#tabs::after {
+	content: "";
+	display: block;
+	position: absolute;
+	z-index: 0;
+	height: 80px;
+	width: 102px;
+	background: #6770DA;
+	transition: transform 400ms;
+}
+#tabs label {
+	position: relative;
+	z-index: 100;
+	display: block;
+	float: left;
+  font-size: 11px;
+	text-transform: uppercase;
+	text-align: center;
+	width: 100px;
+	height: 100%;
+	border-right: 1px dotted #575654;
+	cursor: pointer;
+}
+#tabs label:first-child {
+	border-left: 1px dotted #575654;
+}
+#tabs label::before {
+	content: "";
+	display: block;
+	height: 30px;
+	width: 30px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	margin: 10px auto;
+}
+#tab1::before {
+	background-image: url(assets/head.png);
+}
+#tab2::before {
+	background-image: url(assets/pilosite.png);
+}
+#tab3::before {
+	background-image: url(assets/clothes.png);
+}
+#tab4::before {
+	background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/106891/mans-silhouette.png);
+}
+#radio1:checked ~ #tabs #tab1::before, #radio2:checked ~ #tabs #tab2::before, #radio3:checked ~ #tabs #tab3::before, #radio4:checked ~ #tabs #tab4::before {
+	filter: invert(100%);
+}
+#radio1:checked ~ #tabs::after {
+	transform: translateX(0);
+}
+#radio2:checked ~ #tabs::after {
+	transform: translateX(101px);
+}
+#radio3:checked ~ #tabs::after {
+	transform: translateX(202px);
+}
+#radio4:checked ~ #tabs::after {
+	transform: translateX(303px);
+}
+#content {
+	position: relative;
+	height: 70vh;
+}
+#content::before {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 0;
+	height: 0;
+	margin-left: -50px;
+	border-top: 8px solid #000;
+	border-right: 10px solid #000;
+	border-left: 10px solid transparent;
+	border-bottom: 8px solid transparent;
+}
+#content::after {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 0;
+	height: 0;
+	margin-left: calc(100% + 30px);
+	border-top: 8px solid #000;
+	border-left: 10px solid #000;
+	border-right: 10px solid transparent;
+	border-bottom: 8px solid transparent;
+}
+#content section {
+	position: absolute;
+	transform: translateY(50px);
+	opacity: 0;
+	display: none;
+	transition: transform 500ms, opacity 500ms;
+}
+#radio1:checked ~ #content #content1, #radio2:checked ~ #content #content2, #radio3:checked ~ #content #content3, #radio4:checked ~ #content #content4 {
+	transform: translateY(0);
+	opacity: 1;
+	width: 100%;
+	display: block;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  font-size: 13px;
+  background: #555;
+  padding: 5px 10px;
+  margin: 5px;
+}
