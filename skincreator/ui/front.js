@@ -14,7 +14,7 @@ $('.arrow-right').on('click', function (e) {
 	  newValue = max;
   }
   $(this).prev().val(newValue);
-  $(this).parent().prev().text(newValue + '' + max);
+  $(this).parent().prev().text(newValue + '/' + max);
 });
 
 $('.arrow-left').on('click', function (e) {
@@ -26,38 +26,38 @@ $('.arrow-left').on('click', function (e) {
 	  newValue = 0;
   }
   $(this).next().val(newValue);
-  $(this).parent().prev().text(newValue + '' + max);
+  $(this).parent().prev().text(newValue + '/' + max);
 });
 
 // Arrows for clothes module
 $('.arrowvetement-right').on('click', function (e) {
   var li = $(this).parent().find('li.active'),
     active = li.next(),
-    id = active.attr('data'),
-    max = $(this).parent().find('li:last-of-type').attr('data');
+    id = active.attr('order'),
+    max = $(this).parent().find('li').length -1;
   if ($(this).prev().hasClass('active')) {
     li.removeClass('active');
     $(this).parent().find('li:first-of-type').addClass('active');
-    $(this).parent().parent().find('.label-value').text('0/' + max)
+    $(this).parent().parent().find('.vetements-value').text('0/' + max)
   } else {
     li.removeClass('active');
     active.addClass('active');
-    $(this).parent().parent().find('.label-value').text(id + '/' + max)
+    $(this).parent().parent().find('.vetements-value').text(id + '/' + max)
   }
 });
 $('.arrowvetement-left').on('click', function (e) {
   var li = $(this).parent().find('li.active'),
     active = li.prev(),
-    id = active.attr('data'),
-    max = $(this).parent().find('li:last-of-type').attr('data');
+    id = active.attr('order'),
+    max = $(this).parent().find('li').length -1;
   if ($(this).next().hasClass('active')) {
     li.removeClass('active');
     $(this).parent().find('li:last-of-type').addClass('active');
-    $(this).parent().parent().find('.label-value').text(max + '/' + max)
+    $(this).parent().parent().find('.vetements-value').text(max + '/' + max)
   } else {
     li.removeClass('active');
     active.addClass('active');
-    $(this).parent().parent().find('.label-value').text(id + '/' + max)
+    $(this).parent().parent().find('.vetements-value').text(id + '/' + max)
   }
 });
 
@@ -65,16 +65,16 @@ $('.arrowvetement-left').on('click', function (e) {
 $('.input .label-value').each(function () {
   var max = $(this).attr('data-legend'),
     val = $(this).next().find('input').val();
-  $(this).parent().find('.label-value').text(val + '' + max);
+  $(this).parent().find('.label-value').text(val + '/' + max);
 });
 $('input[type=range]').change(function () {
   var value = parseFloat($(this).val()),
     max = $(this).parent().prev().attr('data-legend');
-  $(this).parent().prev().text(value + '' + max);
+  $(this).parent().prev().text(value + '/' + max);
 });
 $('.vetements .group').each(function () {
-  var max = $(this).find('li:last-of-type').attr('data');
-  $(this).find('.label-value').text('0/' + max);
+  var max = $(this).find('li').length -1;
+  $(this).find('.vetements-value').text('0/'+max);
 });
 
 // Popup click on submit

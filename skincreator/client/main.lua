@@ -2,6 +2,7 @@
 --                          Variables
 ------------------------------------------------------------------
 ESX = nil
+local isMale = false
 local isSkinCreatorOpened = false		-- Change this value to show/hide UI
 local cam = -1							-- Camera control
 local heading = 332.219879				-- Heading coord
@@ -79,11 +80,6 @@ RegisterNUICallback('updateSkin', function(data)
 		
 		TriggerServerEvent("updateSkin", dad, mum, dadmumpercent, skin, eyecolor, acne, skinproblem, freckle, wrinkle, wrinkleopacity, eyebrow, eyebrowopacity, beard, beardopacity, beardcolor, hair, haircolor, torso, torsotext, leg, legtext, shoes, shoestext, accessory, accessorytext, undershirt, undershirttext, torso2, torso2text, prop_hat, prop_hat_text, prop_glasses, prop_glasses_text, prop_earrings, prop_earrings_text, prop_watches, prop_watches_text)
 		
-		TriggerEvent('skinchanger:change', "helmet_1", hats)
-		TriggerEvent('skinchanger:change', "helmet_2", hats_texture)
-		TriggerEvent('skinchanger:change', "glasses_1", glasses)
-		TriggerEvent('skinchanger:change', "glasses_2", glasses_texture)
-		
 		TriggerEvent('skinchanger:getSkin', function(skin)
 			TriggerServerEvent('hud:save', skin)
 			if submitCb ~= nil then
@@ -123,26 +119,36 @@ RegisterNUICallback('updateSkin', function(data)
 		if PrevHat ~= hats then
 			PrevHat = hats
 			hats_texture = 0
+			local maxHat
+			if hats == 0 then
+				maxHat = 0
+			else
+				maxHat = GetNumberOfPedPropTextureVariations	(GetPlayerPed(-1), 0, hats) - 1
+			end
 			SendNUIMessage({
 				type = "updateMaxVal",
 				classname = "helmet_2",
-				maxVal = GetNumberOfPedPropTextureVariations	(GetPlayerPed(-1), 0, hats) - 1
+				maxVal = maxHat
 			})
 		end
 		
-		if hats == -1 then 
+		if hats == 0 then
 			ClearPedProp(GetPlayerPed(-1), 0)
 		else
-			SetPedPropIndex(GetPlayerPed(-1), 0, hats,	0, 2)-- Helmet
+			SetPedPropIndex(GetPlayerPed(-1), 0, hats, hats_texture, 2)
 		end
 		
 		if PrevGlasses ~= glasses then
 			PrevGlasses = glasses
 			glasses_texture = 0
+			local maxGlasses
+			if glasses == 0 then maxGlasses = 0
+			else maxGlasses = GetNumberOfPedPropTextureVariations	(GetPlayerPed(-1), 1, glasses - 1)
+			end
 			SendNUIMessage({
 				type = "updateMaxVal",
 				classname = "glasses_2",
-				maxVal = GetNumberOfPedPropTextureVariations	(GetPlayerPed(-1), 1, glasses - 1)
+				maxVal = maxGlasses
 			})
 		end
 		if glasses == 0 then		

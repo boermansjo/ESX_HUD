@@ -455,7 +455,7 @@ form {
 .vetements h2 {
   color: white; }
 
-.vetements .label-value {
+.vetements .vetements-value {
   position: absolute;
   top: 18px;
   font-size: 14px;
