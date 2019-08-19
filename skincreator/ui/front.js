@@ -6,7 +6,7 @@ $('.color').each(function () {
 
 // Arrows for input[type=range]
 $('.arrow-right').on('click', function (e) {
-  e.preventDefault();
+  //e.preventDefault();
   var value = parseFloat($(this).prev().val()),
     newValue = parseFloat(value + 1),
     max = $(this).parent().prev().attr('data-legend');
@@ -18,7 +18,7 @@ $('.arrow-right').on('click', function (e) {
 });
 
 $('.arrow-left').on('click', function (e) {
-  e.preventDefault();
+  //e.preventDefault();
   var value = parseFloat($(this).next().val()),
     newValue = parseFloat(value - 1),
     max = $(this).parent().prev().attr('data-legend');

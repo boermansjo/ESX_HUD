@@ -14,7 +14,9 @@ $(document).ready(function(){
 	// Click
     if (event.data.type == "updateMaxVal") {
 	  $('input.' + event.data.classname).prop('max',event.data.maxVal);
+	  $('input.' + event.data.classname).val(event.data.defaultVal);
 	  $('div[name=' + event.data.classname + ']').attr('data-legend', '/'+event.data.maxVal);
+	  $('div[name=' + event.data.classname + ']').text(event.data.defaultVal + '/' + event.data.maxVal);
     }
   });
 
@@ -25,6 +27,7 @@ $(document).ready(function(){
       // Face
       dad: $('input[name=pere]:checked', '#formSkinCreator').val(),
       mum: $('input[name=mere]:checked', '#formSkinCreator').val(),
+	  gender: $('.gender').val(),
       dadmumpercent: $('.morphologie').val(),
       skin: $('input[name=peaucolor]:checked', '#formSkinCreator').val(),
       eyecolor: $('input[name=eyecolor]:checked','#formSkinCreator').val(),
@@ -46,6 +49,7 @@ $(document).ready(function(){
       glasses: $('.lunettes .active').attr('data'),
 	  glasses_texture: $('input[class=glasses_2]').val(),
       ears: $('.oreilles .active').attr('data'),
+	  ears_texture: $('input[class=ears_2]').val(),
       tops: $('.hauts .active').attr('data'),
       pants: $('.pantalons .active').attr('data'),
       shoes: $('.chaussures .active').attr('data'),
@@ -59,6 +63,7 @@ $(document).ready(function(){
       // Face
       dad: $('input[name=pere]:checked', '#formSkinCreator').val(),
       mum: $('input[name=mere]:checked', '#formSkinCreator').val(),
+	  gender: $('.gender').val(),
       dadmumpercent: $('.morphologie').val(),
       skin: $('input[name=peaucolor]:checked', '#formSkinCreator').val(),
       eyecolor: $('input[name=eyecolor]:checked','#formSkinCreator').val(),
@@ -80,6 +85,7 @@ $(document).ready(function(){
       glasses: $('.lunettes .active').attr('data'),
 	  glasses_texture: $('input[class=glasses_2]').val(),
       ears: $('.oreilles .active').attr('data'),
+	  ears_texture: $('input[class=ears_2]').val(),
       tops: $('.hauts .active').attr('data'),
       pants: $('.pantalons .active').attr('data'),
       shoes: $('.chaussures .active').attr('data'),
@@ -95,6 +101,7 @@ $(document).ready(function(){
       // Face
       dad: $('input[name=pere]:checked', '#formSkinCreator').val(),
       mum: $('input[name=mere]:checked', '#formSkinCreator').val(),
+	  gender: $('.gender').val(),
       dadmumpercent: $('.morphologie').val(),
       skin: $('input[name=peaucolor]:checked', '#formSkinCreator').val(),
       eyecolor: $('input[name=eyecolor]:checked','#formSkinCreator').val(),
@@ -116,6 +123,7 @@ $(document).ready(function(){
       glasses: $('.lunettes .active').attr('data'),
 	  glasses_texture: $('input[class=glasses_2]').val(),
       ears: $('.oreilles .active').attr('data'),
+	  ears_texture: $('input[class=ears_2]').val(),
       tops: $('.hauts .active').attr('data'),
       pants: $('.pantalons .active').attr('data'),
       shoes: $('.chaussures .active').attr('data'),
@@ -143,17 +151,4 @@ $(document).ready(function(){
       zoom: $(this).attr('data-link')
     }));
   });
-
-  // Test value
-  var xTriggered = 0;
-  $(document).keypress(function(e){
-    e.preventDefault();
-    xTriggered++;
-    if(e.which == 13){
-      $.post('http://skincreator/test', JSON.stringify({
-        value: xTriggered
-      }));
-    }
-  });
-
 });

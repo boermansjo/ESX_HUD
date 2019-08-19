@@ -26,6 +26,16 @@
           <div class="block visage active">
             <div class="group">
               <h2 id="morphology">Morphologie</h2>
+			  <div class="input">
+				<div class="label">Sexe</div>
+				<div class="label"><span>M</span> <span style="float:right;">F</span></div>
+				<div class="label-value" data-legend="" style="display:none;"></div>
+				<div class="type-range">
+				  <a href="#" class="arrow arrow-left" style="color: white; text-decoration: none; text-decoration-style: none;">&nbsp;</a>
+				  <input value="0" type="range" class="gender" min="0" max="1">
+				  <a href="#" class="arrow arrow-right" style="color: white; text-decoration: none; text-decoration-style: none;">&nbsp;</a>
+				</div>
+			  </div>
               <div class="input">
                 <div class="label" id="maleFaces">Visage du père</div>
                 <div class="type-img">
@@ -596,10 +606,10 @@
 			  </ul>
 			  <div class="input">
 				<div class="label">Hat color</div>
-				<div class="label-value" name="helmet_2" data-legend="50"></div>
+				<div class="label-value" name="helmet_2" data-legend="0"></div>
 				<div class="type-range">
 				  <a href="#" class="arrow arrow-left">&nbsp;</a>
-				  <input value="0" type="range" class="helmet_2" min="0" max="50">
+				  <input value="0" type="range" class="helmet_2" min="0" max="0">
 				  <a href="#" class="arrow arrow-right">&nbsp;</a>
 				</div>
 			  </div>
@@ -626,10 +636,10 @@
 			  </ul>
 			  <div class="input">
 				<div class="label">Glasses color</div>
-				<div class="label-value" name="glasses_2" data-legend="50"></div>
+				<div class="label-value" name="glasses_2" data-legend="0"></div>
 				<div class="type-range">
 				  <a href="#" class="arrow arrow-left">&nbsp;</a>
-				  <input value="0" type="range" class="glasses_2" min="0" max="50">
+				  <input value="0" type="range" class="glasses_2" min="0" max="0">
 				  <a href="#" class="arrow arrow-right">&nbsp;</a>
 				</div>
 			  </div>
@@ -639,24 +649,33 @@
               <div class="vetements-value" data-legend="">0</div>
               <ul class="oreilles">
                 <button type="button" class="arrow arrowvetement-left">&nbsp;</button>
-                <li data="0" class="active">Aucune</li>
-                <li data="1">Boucle (gauche)</li>
-                <li data="2">Boucle (droite)</li>
-                <li data="3">Boucle</li>
-                <li data="4">Diamant (droite)</li>
-                <li data="5">Diamant (gauche)</li>
-                <li data="6">Diamant</li>
-                <li data="7">Carré (gauche)</li>
-                <li data="8">Carré (droite)</li>
-                <li data="9">Carré</li>
-                <li data="10">Pique (gauche)</li>
-                <li data="11">Pique (droite)</li>
-                <li data="12">Pique</li>
-                <li data="13">Vrai diamant (gauche)</li>
-                <li data="14">Vrai diamant (droite)</li>
-                <li data="15">Vrai diamant</li>
+                <li order="0" data="0" class="active">Aucune</li>
+                <li order="1" data="3">Boucle (gauche)</li>
+                <li order="2" data="4">Boucle (droite)</li>
+                <li order="3" data="5">Boucle</li>
+                <li order="4" data="9">Diamant (droite)</li>
+                <li order="5" data="10">Diamant (gauche)</li>
+                <li order="6" data="11">Diamant</li>
+                <li order="7" data="18">Carré (gauche)</li>
+                <li order="8" data="19">Carré (droite)</li>
+                <li order="9" data="20">Carré</li>
+                <li order="10" data="27">Pique (gauche)</li>
+                <li order="11" data="28">Pique (droite)</li>
+                <li order="12" data="29">Pique</li>
+                <li order="13" data="30">Vrai diamant (gauche)</li>
+                <li order="14" data="31">Vrai diamant (droite)</li>
+                <li order="15" data="32">Vrai diamant</li>
                 <button type="button" class="arrow arrowvetement-right">&nbsp;</button>
               </ul>
+			  <div class="input">
+				<div class="label">Ears color</div>
+				<div class="label-value" name="ears_2" data-legend="0"></div>
+				<div class="type-range">
+				  <a href="#" class="arrow arrow-left">&nbsp;</a>
+				  <input value="0" type="range" class="ears_2" min="0" max="0">
+				  <a href="#" class="arrow arrow-right">&nbsp;</a>
+				</div>
+			  </div>
             </div>
 
             <div class="group">

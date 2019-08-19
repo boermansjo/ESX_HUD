@@ -2,7 +2,6 @@
 --                          Variables
 ------------------------------------------------------------------
 ESX = nil
-local isMale = false
 local isSkinCreatorOpened = false		-- Change this value to show/hide UI
 local cam = -1							-- Camera control
 local heading = 332.219879				-- Heading coord
@@ -10,7 +9,8 @@ local zoom = "visage"					-- Define which tab is shown first (Default: Head)
 local isCameraActive
 local FirstSpawn     = true
 local PlayerLoaded   = false
-local PrevHat,PrevGlasses
+local PrevHat,PrevGlasses, PrevEars, PrevGender
+local face
 
 Citizen.CreateThread(function()
 	while ESX == nil do
@@ -25,10 +25,12 @@ end)
 ------------------------------------------------------------------
 
 RegisterNUICallback('updateSkin', function(data)
+	local playerPed = PlayerPedId()
 	v = data.value
 	-- Face
 	dad = tonumber(data.dad)
 	mum = tonumber(data.mum)
+	gender = tonumber(data.gender)
 	dadmumpercent = tonumber(data.dadmumpercent)
 	skin = tonumber(data.skin)
 	eyecolor = tonumber(data.eyecolor)
@@ -50,6 +52,7 @@ RegisterNUICallback('updateSkin', function(data)
 	glasses = tonumber(data.glasses)
 	glasses_texture = tonumber(data.glasses_texture)
 	ears = tonumber(data.ears)
+	ears_texture = tonumber(data.ears_texture)
 	tops = tonumber(data.tops)
 	pants = tonumber(data.pants)
 	shoes = tonumber(data.shoes)
@@ -78,21 +81,26 @@ RegisterNUICallback('updateSkin', function(data)
 		local prop_watches = GetPedPropIndex(ped, 6)
 		local prop_watches_text = GetPedPropTextureIndex(ped, 6)
 		
-		TriggerServerEvent("updateSkin", dad, mum, dadmumpercent, skin, eyecolor, acne, skinproblem, freckle, wrinkle, wrinkleopacity, eyebrow, eyebrowopacity, beard, beardopacity, beardcolor, hair, haircolor, torso, torsotext, leg, legtext, shoes, shoestext, accessory, accessorytext, undershirt, undershirttext, torso2, torso2text, prop_hat, prop_hat_text, prop_glasses, prop_glasses_text, prop_earrings, prop_earrings_text, prop_watches, prop_watches_text)
+		local skin_data = {["sex"]=gender,["face"]=face,["skin"]=skin,["eye_color"]=eyecolor,["complexion_1"]=skinproblem,["complexion_2"]=1,["moles_1"]=freckle,["moles_2"]=1,["age_1"]=wrinkle,["age_2"]=wrinkleopacity,["eyebrows_1"]=eyebrow,["eyebrows_2"]=eyebrowopacity,["beard_1"]=beard,["beard_2"]=beardopacity,["beard_3"]=beardcolor,["beard_4"]=beardcolor,["hair_1"]=hair,["hair_2"]=0,["hair_color_1"]=haircolor,["hair_color_2"]=haircolor,["arms"]=torso,["arms_2"]=torsotext,["pants_1"]=leg,["pants_2"]=legtext,["shoes_1"]=shoes,["shoes_2"]=shoestext,["chain_1"]=accessory,["chain_2"]=accessorytext,["tshirt_1"]=undershirt,["tshirt_2"]=undershirttext,["torso_1"]=torso2,["torso_2"]=torso2text,["helmet_1"]=prop_hat,["helmet_2"]=prop_hat_text,["glasses_1"]=prop_glasses,["glasses_2"]=prop_glasses_text,["ears_1"]=prop_earrings,["ears_2"]=prop_earrings_text,["watches_1"]=prop_watches,["watches_2"]=prop_watches_text}
 		
-		TriggerEvent('skinchanger:getSkin', function(skin)
-			TriggerServerEvent('hud:save', skin)
-			if submitCb ~= nil then
-				submitCb(data, menu)
-			end
-		end)
+		TriggerServerEvent('hud:save', skin_data)
 		
 		CloseSkinCreator()
 	else
-		SetPedDefaultComponentVariation(GetPlayerPed(-1))
+		if PrevGender ~= gender then
+			local characterModel
+
+			if gender == 0 then
+				TriggerEvent('skinchanger:change', 'sex', 0)
+				face = dad
+			else
+				TriggerEvent('skinchanger:change', 'sex', 1)
+				face = mum
+			end
+		end
 
 		-- Face
-		SetPedHeadBlendData			(GetPlayerPed(-1), dad, mum, dad, skin, skin, skin, dadmumpercent * 0.1, dadmumpercent * 0.1, 1.0, true)
+		SetPedHeadBlendData			(GetPlayerPed(-1), face, face, face, skin, skin, skin, dadmumpercent * 0.1, dadmumpercent * 0.1, 1.0, true)
 		
 		SetPedEyeColor				(GetPlayerPed(-1), eyecolor)
 		if acne == 0 then
@@ -128,6 +136,7 @@ RegisterNUICallback('updateSkin', function(data)
 			SendNUIMessage({
 				type = "updateMaxVal",
 				classname = "helmet_2",
+				defaultVal = 0,
 				maxVal = maxHat
 			})
 		end
@@ -148,6 +157,7 @@ RegisterNUICallback('updateSkin', function(data)
 			SendNUIMessage({
 				type = "updateMaxVal",
 				classname = "glasses_2",
+				defaultVal = 0,
 				maxVal = maxGlasses
 			})
 		end
@@ -156,23 +166,24 @@ RegisterNUICallback('updateSkin', function(data)
 		else
 			SetPedPropIndex(GetPlayerPed(-1), 1, glasses, glasses_texture, 2)--Glasses
 		end
-	
+		
+		if PrevEars ~= ears then
+			PrevEars = ears
+			ears_texture = 0
+			local maxEars
+			if ears == 0 then maxEars = 0
+			else maxEars = GetNumberOfPedPropTextureVariations	(GetPlayerPed(-1), 1, ears - 1)
+			end
+			SendNUIMessage({
+				type = "updateMaxVal",
+				classname = "ears_2",
+				defaultVal = 0,
+				maxVal = maxEars
+			})
+		end
 		if ears == 0 then		ClearPedProp(GetPlayerPed(-1), 2)
-		elseif ears == 1 then	SetPedPropIndex(GetPlayerPed(-1), 2, 4-1, 1-1, 2)
-		elseif ears == 2 then	SetPedPropIndex(GetPlayerPed(-1), 2, 5-1, 1-1, 2)
-		elseif ears == 3 then	SetPedPropIndex(GetPlayerPed(-1), 2, 6-1, 1-1, 2)
-		elseif ears == 4 then	SetPedPropIndex(GetPlayerPed(-1), 2, 10-1, 2-1, 2)
-		elseif ears == 5 then	SetPedPropIndex(GetPlayerPed(-1), 2, 11-1, 2-1, 2)
-		elseif ears == 6 then	SetPedPropIndex(GetPlayerPed(-1), 2, 12-1, 2-1, 2)
-		elseif ears == 7 then	SetPedPropIndex(GetPlayerPed(-1), 2, 19-1, 4-1, 2)
-		elseif ears == 8 then	SetPedPropIndex(GetPlayerPed(-1), 2, 20-1, 4-1, 2)
-		elseif ears == 9 then	SetPedPropIndex(GetPlayerPed(-1), 2, 21-1, 4-1, 2)
-		elseif ears == 10 then	SetPedPropIndex(GetPlayerPed(-1), 2, 28-1, 1-1, 2)
-		elseif ears == 11 then	SetPedPropIndex(GetPlayerPed(-1), 2, 29-1, 1-1, 2)
-		elseif ears == 12 then	SetPedPropIndex(GetPlayerPed(-1), 2, 30-1, 1-1, 2)
-		elseif ears == 13 then	SetPedPropIndex(GetPlayerPed(-1), 2, 31-1, 1-1, 2)
-		elseif ears == 14 then	SetPedPropIndex(GetPlayerPed(-1), 2, 32-1, 1-1, 2)
-		elseif ears == 15 then	SetPedPropIndex(GetPlayerPed(-1), 2, 33-1, 1-1, 2)
+		else
+			SetPedPropIndex(GetPlayerPed(-1), 2, ears, ears_texture, 2)
 		end
 	
 		-- Keep these 4 variations together.
@@ -999,6 +1010,7 @@ local elements    = {}
 		SendNUIMessage({
 			type = "updateMaxVal",
 			classname = name,
+			defaultVal = 0,
 			maxVal = Valmax
 		})
 	end
@@ -1077,41 +1089,7 @@ Citizen.CreateThread(function()
 				SetCamCoord(cam, x+0.3, y+2.0, z+0.0)
 				SetCamRot(cam, 0.0, 0.0, 170.0)
 			end
-			
-			--Rotate camera
-			local angle = heading * math.pi / 180.0
-			local theta = {
-				x = math.cos(angle),
-				y = math.sin(angle)
-			}
-
-			local pos = {
-				x = x + (0.2 * theta.x),
-				y = y + (1 * theta.y)
-			}
-
-			local angleToLook = heading - 140.0
-			if angleToLook > 360 then
-				angleToLook = angleToLook - 360
-			elseif angleToLook < 0 then
-				angleToLook = angleToLook + 360
-			end
-
-			angleToLook = angleToLook * math.pi / 180.0
-			local thetaToLook = {
-				x = math.cos(angleToLook),
-				y = math.sin(angleToLook)
-			}
-
-			local posToLook = {
-				x = x + (0.2 * thetaToLook.x),
-				y = y + (1 * thetaToLook.y)
-			}
-			
-			SetCamCoord(cam, pos.x, pos.y, z+0.7)
-			PointCamAtCoord(cam, posToLook.x, posToLook.y, z)
-
-			--ESX.ShowHelpNotification(_U('use_rotate_view'))
+			SetEntityHeading(GetPlayerPed(-1), heading)
 		else
 			Citizen.Wait(500)
 		end
