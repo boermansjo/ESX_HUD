@@ -22,5 +22,5 @@ All credits go to him.
 ## Changes
 * HTML, CSS, Javascript changes.
 * Camera is now fixed.
-* Starting to revamp the entire script !!! Only Hats are working correctly (the legend not yet) The Hat data is also saved via skinchanger.
+* All cloths are saved. Will add a few more options and female only menus.
 * Character now loads correctly after the initial login.
