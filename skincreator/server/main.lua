@@ -32,7 +32,7 @@ AddEventHandler('esx_skin:responseSaveSkin', function(skin)
 
 end)
 
-ESX.RegisterServerCallback('hud:getPlayerSkin', function(source, cb)
+ESX.RegisterServerCallback('esx_skin:getPlayerSkin', function(source, cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	
 	MySQL.Async.fetchAll('SELECT * FROM users WHERE identifier = @identifier', {
