@@ -13,8 +13,11 @@ All credits go to him.
  Example : ```spawnpoint 'mp_m_freemode_01' { x = -1044.73, y = -2749.13, z = 21.3634 }```
  
 * If you use any other scripts that uses esx_skin. You will have to change the dependencies :
+
 ```dependencies { 'es_extended', 'esx_skin' }```
+
 into
+
 ```dependencies { 'es_extended', 'skincreator' }```
  
 ## To Do
