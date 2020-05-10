@@ -21,8 +21,7 @@ into
 ```dependencies { 'es_extended', 'skincreator' }```
  
 ## To Do
-* Female skins
-* Clean-up code
+* Female skins (Still not finished)
 
 ## Changes
 * HTML, CSS, Javascript changes.
@@ -30,3 +29,9 @@ into
 * All cloths are saved. Will add a few more options and female only menus.
 * Character now loads correctly after the initial login.
 * All native functions of ESX_SKIN are imported in this script.
+* Script updated to use ESX V1.2
+* Remove old esx_skin.
+* HTML, CSS and Javascript updates
+* Skinchanger correctly updated after creating the ped
+* HTML update for easy translations
+* HTML update for easy adding/changing outfits
