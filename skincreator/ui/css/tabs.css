@@ -1,0 +1,132 @@
+#genderFemale,
+input[name=css-tabs] {
+  display: none
+}
+
+a {
+  color: #f29a77
+}
+
+#tabs {
+  padding: 0 0 0 5.34vh;
+  width: 100%;
+  background: #2b2a28;
+  height: 8.54vh;
+  border-bottom: .53vh solid #1f90a3;
+  box-shadow: 0 .32vh .53vh rgba(0, 0, 0, .2)
+}
+
+#tabs::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 0;
+  height: 8.54vh;
+  width: 10.88vh;
+  background: #1f90a3;
+  transition: transform .4s
+}
+
+#tabs label {
+  position: relative;
+  z-index: 100;
+  display: block;
+  float: left;
+  font-size: 1.28vh;
+  text-transform: uppercase;
+  text-align: center;
+  width: 10.67vh;
+  height: 100%;
+  border-right: .107vh dotted #575654;
+  cursor: pointer
+}
+
+#tabs label:first-child {
+  border-left: .107vh dotted #575654
+}
+
+#tabs label::before {
+  content: "";
+  display: block;
+  height: 3.2vh;
+  width: 3.2vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin: 1.07vh auto
+}
+
+#tab_Face::before {
+  background-image: url(../assets/head.png)
+}
+
+#tab_Style::before {
+  background-image: url(../assets/pilosite.png)
+}
+
+#tab_Clothes::before {
+  background-image: url(../assets/clothes.png)
+}
+
+#radio_Clothes:checked~#tabs #tab_Clothes::before,
+#radio_Face:checked~#tabs #tab_Face::before,
+#radio_Style:checked~#tabs #tab_Style::before {
+  filter: invert(100%)
+}
+
+#radio_Face:checked~#tabs::after {
+  transform: translateX(0)
+}
+
+#radio_Style:checked~#tabs::after {
+  transform: translateX(10.78vh)
+}
+
+#radio_Clothes:checked~#tabs::after {
+  transform: translateX(21.56vh)
+}
+
+#content {
+  position: relative;
+  height: 73vh
+}
+
+#content::after,
+#content::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: .85vh solid #000;
+  border-bottom: .85vh solid transparent
+}
+
+#content::before {
+  margin-left: -5.34vh;
+  border-right: 1.07vh solid #000;
+  border-left: 1.07vh solid transparent
+}
+
+#content::after {
+  margin-left: calc(100% + 3.2vh);
+  border-left: 1.07vh solid #000;
+  border-right: 1.07vh solid transparent
+}
+
+#content section {
+  position: absolute;
+  transform: translateY(5.34vh);
+  opacity: 0;
+  display: none;
+  transition: transform .5s, opacity .5s
+}
+
+#radio_Clothes:checked~#content #content3,
+#radio_Face:checked~#content #content1,
+#radio_Style:checked~#content #content2 {
+  transform: translateY(0);
+  opacity: 1;
+  width: 100%;
+  display: block
+}
