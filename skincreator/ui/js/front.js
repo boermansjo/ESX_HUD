@@ -15,9 +15,6 @@ $('.arrow-right').on('click', function(e) {
   }
   $(this).prev().val(newValue);
   $(this).parent().prev().text(newValue + '/' + max);
-  $.post('http://skincreator/zoom', JSON.stringify({
-    zoom: $(this).parent().attr('data-link')
-  }));
 });
 
 $('.arrow-left').on('click', function(e) {
