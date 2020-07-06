@@ -4,7 +4,7 @@ https://github.com/Naikzer/HUD-GTAVRP
 
 All credits go to him.
 
-# !!!WARNING!!! After the update this script no longer has the default esx_skin menu. ESX_clothshop will not work anymore.
+# !!!WARNING!!! After the update this script no longer has the default esx_skin menu.
 ## I can use help to get this script working with esx_skin so that the shop still works.
 ## There will be a new clothshop that will work without esx_skin.
 
