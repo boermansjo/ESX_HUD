@@ -1,4 +1,7 @@
 # ESX_HUD
+
+There is a new version with a lot of more options : https://github.com/PainedPsyche/cui_character
+
 Working version of Naiko's script.
 https://github.com/Naikzer/HUD-GTAVRP
 
