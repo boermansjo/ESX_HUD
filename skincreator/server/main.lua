@@ -4,19 +4,19 @@ TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
 RegisterServerEvent('esx_skin:save')
 AddEventHandler('esx_skin:save', function(skin)
-	local xPlayer = ESX.GetPlayerFromId(source)
-	local defaultMaxWeight = ESX.GetConfig().MaxWeight
-	local backpackModifier = Config.BackpackWeight[skin.bags_1]
+	-- local xPlayer = ESX.GetPlayerFromId(source)
+	-- local defaultMaxWeight = ESX.GetConfig().MaxWeight
+	-- local backpackModifier = Config.BackpackWeight[skin.bags_1]
 
-	if backpackModifier then
-		xPlayer.setMaxWeight(defaultMaxWeight + backpackModifier)
-	else
-		xPlayer.setMaxWeight(defaultMaxWeight)
-	end
-
+	-- if backpackModifier then
+	-- 	xPlayer.setMaxWeight(defaultMaxWeight + backpackModifier)
+	-- else
+	-- 	xPlayer.setMaxWeight(defaultMaxWeight)
+	-- end
+	local identifier = GetPlayerIdentifiers(source)[1]
 	MySQL.Async.execute('UPDATE users SET skin = @skin WHERE identifier = @identifier', {
 		['@skin'] = json.encode(skin),
-		['@identifier'] = xPlayer.identifier
+		['@identifier'] = identifier
 	})
 end)
 
