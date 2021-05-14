@@ -30,7 +30,7 @@ function update(save) {
     skinproblem: $('.pbpeau').val(),
     freckle: $('.tachesrousseur').val(),
     wrinkle: $('.rides').val(),
-    wrinkleopacity: $('.rides').val(),
+    wrinkleopacity: $('.intensiterides').val(),
     hair: $('.hair').val(),
     haircolor: $('input[name=haircolor]:checked', '#formSkinCreator').val(),
     eyebrow: $('.sourcils').val(),
